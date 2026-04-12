@@ -1,0 +1,11 @@
+{
+    	"geode": "2.0.0-beta.1",
+        	"gd": "2.204",
+            	"version": "v1.0.0",
+                	"id": "tu-nombre.tu-mod",
+                    	"name": "Nombre de tu Mod",
+                        	"developer": "TuNombre",
+                            	"description": "Una descripción corta de tu mod."
+                                }
+                                
+}
