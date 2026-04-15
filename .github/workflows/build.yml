@@ -1,4 +1,4 @@
-name: Build Geode Mod concurrency: 
+name: Build Geode Mod
 
 on:
   push:
