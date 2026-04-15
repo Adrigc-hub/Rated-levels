@@ -6,7 +6,7 @@ on:
       - main
   workflow_dispatch:
 
- jobs:
+  jobs:
    build:
      strategy:
        fail-fast: false
@@ -26,7 +26,7 @@ on:
      uses: actions/checkout@v4
 
     -name: Build Mod
-   uses: geode-sdk/build-geode-mod@main
+  uses: geode-sdk
      with:
       target: ${{ matrix.config.target }}
       combine: true
