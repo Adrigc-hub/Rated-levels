@@ -1,53 +1,35 @@
 #include <Geode/Geode.hpp>
-#include <Geode/modify/LevelBrowserLayer.hpp>
+#include <Geode/modify/MenuLayer.hpp>
 
 using namespace geode::prelude;
 
-class $modify(MyCustomBrowser, LevelBrowserLayer) {
-    bool init(GJSearchObject* search) {
-        if (!LevelBrowserLayer::init(search)) return false;
+class $modify(MenuLayer) {
+    bool init() {
+        if (!MenuLayer::init()) return false;
 
-        auto winSize = CCDirector::get()->getWinSize();
+        // 1. Obtener el tamaño de la ventana para posicionamiento relativo
+        auto winSize = CCDirector::sharedDirector()->getWinSize();
+
+        // 2. Crear el sprite de tu botón (puedes usar uno existente del juego)
+        auto sprite = CCSprite::createWithSpriteFrameName("GJ_playBtn_001.png"); // Cambia por tu icono
+        sprite->setScale(0.5f);
+
+        // 3. Crear el botón con una función (callback)
+        auto btn = CCMenuItemSpriteExtra::create(
+            sprite, this, menu_selector(MenuLayer::onMoreGames) // Cambia onMoreGames por tu función
+        );
+
+        // 4. Crear un menú para contener el botón
         auto menu = CCMenu::create();
-        menu->setID("custom-layout-menu");
+        
+        // POSICIONAMIENTO: Aquí es donde lo subes
+        // winSize.width / 2 es el centro horizontal
+        // winSize.height / 2 + 50 lo sube 50 unidades arriba del centro
+        menu->setPosition({ winSize.width / 2, (winSize.height / 2) + 80.f });
+        
+        menu->addChild(btn);
         this->addChild(menu);
 
-        // --- BOTÓN DE METRO (EL MÁS ALTO) ---
-        auto metroSprite = CCSprite::createWithSpriteFrameName("GJ_completesIcon_001.png"); 
-        metroSprite->setColor({ 0, 255, 255 }); // Color Cian
-        metroSprite->setScale(0.7f);
-
-        auto metroBtn = CCMenuItemSpriteExtra::create(
-            metroSprite, this, menu_selector(MyCustomBrowser::onMetro)
-        );
-        // El 80 lo hace estar más arriba
-        metroBtn->setPosition({ -160, 80 }); 
-        menu->addChild(metroBtn);
-
-        // --- BOTÓN DE LAYOUTS ---
-        auto layoutSprite = CCSprite::createWithSpriteFrameName("GJ_plainBtn_001.png");
-        layoutSprite->setColor({ 255, 150, 0 }); // Color Naranja
-        layoutSprite->setScale(0.6f);
-
-        auto layoutBtn = CCMenuItemSpriteExtra::create(
-            layoutSprite, this, menu_selector(MyCustomBrowser::onCustomLayouts)
-        );
-        // El 40 lo hace estar debajo del Metro
-        layoutBtn->setPosition({ -160, 40 }); 
-        menu->addChild(layoutBtn);
-
         return true;
-    }
-
-    void onMetro(CCObject* sender) {
-        auto searchObj = GJSearchObject::create(SearchType::Featured); 
-        auto scene = LevelBrowserLayer::scene(searchObj);
-        CCDirector::get()->replaceScene(CCTransitionFade::create(0.5f, scene));
-    }
-
-    void onCustomLayouts(CCObject* sender) {
-        auto searchObj = GJSearchObject::create(SearchType::Search, "Layout");
-        auto scene = LevelBrowserLayer::scene(searchObj);
-        CCDirector::get()->replaceScene(CCTransitionFade::create(0.5f, scene));
     }
 };
