@@ -3,6 +3,7 @@ name: Build Geode Mod
 on:
   push:
     branches: ["main"]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -29,5 +30,5 @@ jobs:
       - name: Build Mod
         uses: geode-sdk/build-geode-mod@main
         with:
-          bindings-update: true
+          if-branch: main
           target: ${{ matrix.config.target }}
