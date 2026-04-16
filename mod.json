@@ -1,11 +1,16 @@
 {
-    	"geode": "2.0.0-beta.1",
-        	"gd": "2.204",
-            	"version": "v1.0.0",
-                	"id": "tu-nombre.tu-mod",
-                    	"name": "Nombre de tu Mod",
-                        	"developer": "TuNombre",
-                            	"description": "Una descripción corta de tu mod."
-                                }
-                                
+	"geode": "3.0.0-beta.1",
+	"gd": "2.204",
+	"id": "tuusuario.layout_plus",
+	"version": "v1.0.0",
+	"name": "Layout Plus",
+	"developer": "TuNombre",
+	"description": "Botón de layouts posicionado más arriba para evitar conflictos.",
+	"dependencies": [
+		{
+			"id": "geode.loader",
+			"version": ">=3.0.0-beta.1",
+			"importance": "required"
+		}
+	]
 }

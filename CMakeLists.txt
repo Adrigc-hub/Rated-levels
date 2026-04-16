@@ -1,13 +1,10 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.25)
 
-project(NombreDeTuMod)
+project(MiModLayouts)
 
-find_package(Geode REQUIRED)
+find_package(Geode CONFIG REQUIRED)
 
 add_geode_mod(
-        ${PROJECT_NAME}
-            SOURCES
-                    src/main.cpp
-)
-
+    ${PROJECT_NAME}
+    SOURCES src/main.cpp
 )
