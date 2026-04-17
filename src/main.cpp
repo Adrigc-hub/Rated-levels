@@ -1,43 +1,25 @@
-#include <Geode/Geode.hpp>
-#include <Geode/modify/MenuLayer.hpp>
-
-using namespace geode::prelude;
-
 class $modify(MyMenuLayer, MenuLayer) {
     bool init() {
         if (!MenuLayer::init()) return false;
 
-        auto winSize = CCDirector::get()->getWinSize();
+        // ... tu código anterior ...
 
-        // 1. Crear el sprite del botón (puedes cambiar "GJ_playBtn_001.png" por otro)
-        auto sprite = CCSprite::createWithSpriteFrameName("GJ_playBtn_001.png");
-        sprite->setScale(0.6f);
-
-        // 2. Crear el botón con una función (lambda) que se ejecuta al tocarlo
-        auto btn = CCMenuItemSpriteExtra::create(
-            sprite,
-            this,
-            menu_selector(MyMenuLayer::onMyCustomButtonClick)
+        auto myButton = CCMenuItemSpriteExtra::create(
+            buttonSprite, 
+            this, 
+            menu_selector(MyMenuLayer::onMyCustomButton) // Cambiado aquí
         );
 
-        // 3. Buscar el menú principal de Geode para que sea compatible con otros mods
-        auto menu = this->getChildByID("main-menu");
-        
-        if (menu) {
-            menu->addChild(btn);
-            btn->setID("rated-layouts-btn"_spr); // ID único
-            menu->updateLayout(); // Reorganiza los botones automáticamente
-        }
-
+        // ... resto del código ...
         return true;
     }
 
-    // Función que se ejecuta al tocar el botón
-    void onMyCustomButtonClick(CCObject* sender) {
+    // Tu nueva función
+    void onMyCustomButton(CCObject* sender) {
         FLAlertLayer::create(
-            "Rated Layouts",    // Título
-            "¡El botón funciona!", // Mensaje
-            "OK"                // Botón de cerrar
+            "¡Hola!", 
+            "Este es un botón personalizado creado con <cr>Geode</c>.", 
+            "OK"
         )->show();
     }
 };
