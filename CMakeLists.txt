@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.25)
 project(RatedLayoutsMod)
 
 # Busca el SDK de Geode (el que GitHub descargará automáticamente)
-find_package(Geode CONFIG REQUIRED)
+find_package(Geode REQUIRED)
 
 # Configuración del Mod
 add_geode_mod(
