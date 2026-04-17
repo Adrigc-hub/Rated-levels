@@ -30,7 +30,8 @@ jobs:
       - name: Build Mod
         uses: geode-sdk/build-geode-mod@main
         with:
-          sdk: latest
-          if-branch: main
-          target: ${{ matrix.config.target }}
+         sdk: v3.0.0-beta.1
+         target: ${{ matrix.config.target }}
+
+    
        
