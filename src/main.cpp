@@ -5,34 +5,39 @@ using namespace geode::prelude;
 
 class $modify(MyMenuLayer, MenuLayer) {
     bool init() {
-        // Run the original init() first
         if (!MenuLayer::init()) return false;
 
-        auto winSize = CCDirector::sharedDirector()->getWinSize();
+        auto winSize = CCDirector::get()->getWinSize();
 
-        // 1. Create the button sprite
-        // Using a standard sprite frame name from the game's sheets
+        // 1. Crear el sprite del botón (puedes cambiar "GJ_playBtn_001.png" por otro)
         auto sprite = CCSprite::createWithSpriteFrameName("GJ_playBtn_001.png");
-        sprite->setScale(0.5f);
+        sprite->setScale(0.6f);
 
-        // 2. Create the button
-        // menu_selector is fine, but Geode also supports modern lambda callbacks!
+        // 2. Crear el botón con una función (lambda) que se ejecuta al tocarlo
         auto btn = CCMenuItemSpriteExtra::create(
-            sprite, 
-            this, 
-            menu_selector(MenuLayer::onMoreGames) // Reusing an existing function
+            sprite,
+            this,
+            menu_selector(MyMenuLayer::onMyCustomButtonClick)
         );
 
-        // 3. Create the menu container
-        // It's better to add the button to the existing 'main-menu' 
-        // or create a new CCMenu to handle layout/touch priority.
-        auto menu = CCMenu::create();
-        menu->setPosition({ winSize.width / 2, (winSize.height / 2) + 80.f });
-        menu->setID("my-custom-menu"_spr); // Good practice for compatibility with other mods
-
-        menu->addChild(btn);
-        this->addChild(menu);
+        // 3. Buscar el menú principal de Geode para que sea compatible con otros mods
+        auto menu = this->getChildByID("main-menu");
+        
+        if (menu) {
+            menu->addChild(btn);
+            btn->setID("rated-layouts-btn"_spr); // ID único
+            menu->updateLayout(); // Reorganiza los botones automáticamente
+        }
 
         return true;
+    }
+
+    // Función que se ejecuta al tocar el botón
+    void onMyCustomButtonClick(CCObject* sender) {
+        FLAlertLayer::create(
+            "Rated Layouts",    // Título
+            "¡El botón funciona!", // Mensaje
+            "OK"                // Botón de cerrar
+        )->show();
     }
 };
