@@ -1,16 +1,10 @@
 {
-	"geode": "3.0.0-beta.1",
+	"geode": "v3.0.0-beta.1",
 	"gd": "2.204",
-	"id": "tuusuario.layout_plus",
+	"id": "adradrigc1214gd.rated_levels",
 	"version": "v1.0.0",
-	"name": "Layout Plus",
-	"developer": "TuNombre",
+	"name": "Rated levels",
+	"developer": "adradrigc1214gd",
 	"description": "Botón de layouts posicionado más arriba para evitar conflictos.",
-	"dependencies": [
-		{
-			"id": "geode.loader",
-			"version": ">=3.0.0-beta.1",
-			"importance": "required"
-		}
-	]
+	"dependencies": []
 }
