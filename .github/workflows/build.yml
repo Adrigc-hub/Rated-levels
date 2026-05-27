@@ -2,8 +2,9 @@ name: Build Geode Mod
 
 on:
   push:
-    branches: ["main"]
-  workflow_dispatch:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
@@ -12,29 +13,25 @@ jobs:
       matrix:
         config:
           - name: Windows
-            os: windows-latest
-          - name: Android64
+            os: windows-2022
+          - name: Android
             os: ubuntu-latest
-            target: Android64
-          - name: Android32
-            os: ubuntu-latest
-            target: Android32
+            target: Android
 
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
 
     steps:
-      - name: Checkout
+      - name: Checkout del Repositorio
         uses: actions/checkout@v4
 
-      - name: Build Mod
-        uses: geode-sdk/build-geode-mod@main
+      - name: Configurar e Instalar Geode CLI
+        uses: geode-sdk/actions/setup@main
         with:
-          sdk: v5.5.0
+          build-config: Release
           target: ${{ matrix.config.target }}
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.config.name }}-build
-          path: "**/*.geode"
+      - name: Compilar Mod Completo
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --config Release
