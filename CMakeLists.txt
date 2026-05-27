@@ -1,22 +1,24 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.13)
 
-# Nombre de tu proyecto
-project(RatedLayoutsMod)
+project(CustomRateLayouts VERSION 1.0.0 LANGUAGES CXX)
 
-# Busca el SDK de Geode (el que GitHub descargará automáticamente)
-find_package(Geode REQUIRED)
+include(FetchContent)
 
-# Configuración del Mod
-add_geode_mod(
-    ${PROJECT_NAME}
-    # Archivos de código (asegúrate de que tu archivo se llame main.cpp y esté en la carpeta src)
-    SOURCES 
-        src/main.cpp
-    
-    # Si añades imágenes (.png) o sonidos (.ogg), ponlos en una carpeta llamada 'resources'
-    # y descomenta la línea de abajo:
-    # RESOURCES resources/
+FetchContent_Declare(
+    Geode
+    GIT_REPOSITORY https://github.com/geode-sdk/geode.git
+    GIT_TAG main
 )
 
-# Esto es opcional pero recomendado: ayuda a organizar los archivos en editores
-set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER "Mods")
+FetchContent_MakeAvailable(Geode)
+
+add_geode_mod(
+    teamdev.custom_rate_layouts
+    VERSION 1.0.0
+    SOURCES 
+        src/main.cpp
+    RESOURCES
+        resources/custom_rate_icon.png
+)
+
+target_compile_features(teamdev.custom_rate_layouts PUBLIC cxx_std_20)
