@@ -1,10 +1,20 @@
 {
-	"geode": "v5.5.0",
-	"gd": "2.2074",
-	"id": "adradrigc1214gd.rated_levels",
-	"version": "v1.0.0",
-	"name": "Rated levels",
-	"developer": "adradrigc1214gd",
-	"description": "Botón de layouts posicionado más arriba para evitar conflictos.",
-	"dependencies": []
+  "geode": "3.0.0-beta.1",
+  "id": "teamdev.custom_rate_layouts",
+  "version": "1.0.0",
+  "name": "Custom Rate Layouts & Curator Guide",
+  "developer": "Tu Equipo de Mods",
+  "description": "Añade un sistema de rates personalizado con detección de colisión para Rated Layouts y una guía épica de curación interactiva dentro del editor.",
+  "dependencies": [
+    {
+      "id": "alphalaneous.rated_layouts",
+      "version": ">=1.0.0",
+      "importance": "optional"
+    }
+  ],
+  "resources": {
+    "sprites": [
+      "resources/*.png"
+    ]
+  }
 }
