@@ -3,7 +3,7 @@
   "id": "teamdev.custom_rate_layouts",
   "version": "1.0.0",
   "name": "Custom Rate Layouts & Curator Guide",
-  "developer": "Tu Equipo de Mods",
+  "developer": "adrAdrigc1214gd",
   "description": "Añade un sistema de rates personalizado con detección de colisión para Rated Layouts y una guía épica de curación interactiva dentro del editor.",
   "dependencies": [
     {
